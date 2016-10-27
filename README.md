@@ -3,7 +3,9 @@
 **"INSTALL":**
 
 1 - Install via composer the package elasticsearch/elasticsearch and include in your bootstrap.php file
+
 2 - Include to your database.php config file the public var $$elasticsearch and set the addres(es) / port(s) to your elastic database
+
 3 - Copy files /Controler/Component/ElasticSearchComponent.php, /View/Helper/ElasticPaginatorHelper.php and /Model/Datasource/ElasticSearchṗhp to your
     /Controler/Component, /View/Helper folders and /Model/Datasource/ 
     
@@ -32,6 +34,7 @@ $query = [
 $query = $this->ElasticSearch->paginate($query, $page);
 ```
 query : your current query (array),
+
 page : actual page number (int).
 
 **SORT**
@@ -39,15 +42,20 @@ page : actual page number (int).
 $query = $this->ElasticSearch->sort($query, $field, $order, $scoreFirst);
 ```
 query : your current query (array),
+
 field : field to order by (str),
+
 order : direction: 'asc' or 'desc' (str),
+
 scoreFirst: if true the score order will be the first one, the field order the second one: true or false (bool). 
+
 
 **MATCH**
 ```
 $query = $this->ElasticSearch->match($query, $conditions);
 ```
 query : your current query (array),
+
 conditions: array with conditions where key = field name and value = filter to match (array)
 ```
     $condition = [
@@ -61,6 +69,7 @@ conditions: array with conditions where key = field name and value = filter to m
 $query = $this->ElasticSearch->notMatch($query, $conditionsNot);
 ```
 query : your current query (array),
+
 conditionsNot: array with conditions to deny where key = field name and value = filter to match (array)
 ```
     $condition = [
@@ -74,6 +83,7 @@ conditionsNot: array with conditions to deny where key = field name and value = 
 $query = $this->ElasticSearch->matchOr($query, $conditionsOr);
 ```
 query : your current query (array),
+
 conditionsOr: array with conditions where key = field name and value = filter to match (array)
 ```
     $condition = [
@@ -87,6 +97,7 @@ conditionsOr: array with conditions where key = field name and value = filter to
 $query = $this->ElasticSearch->wildcard($query, $search);
 ```
 query : your current query (array),
+
 search: array with conditions where key = field name and value with wildcards = filter to find (array)
 ```
     $condition = [
@@ -100,6 +111,7 @@ search: array with conditions where key = field name and value with wildcards = 
 $query = $this->ElasticSearch->range($query, $range);
 ```
 query : your current query (array),
+
 search: array with conditions where key = field name as array and values 'start' and 'end' with ranges
 ```
     $range = [
@@ -115,6 +127,7 @@ search: array with conditions where key = field name as array and values 'start'
 $query = $this->ElasticSearch->sum($query, $sums);
 ```
 query : your current query (array),
+
 search: array with names and fields to create sums where key = name sum and value  = field (array)
 ```
     $sums = [

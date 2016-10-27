@@ -1,13 +1,13 @@
 # cakephp2-elasticsearch
 
-"INSTALL":
+**"INSTALL":**
 
 1 - Install via composer the package elasticsearch/elasticsearch and include in your bootstrap.php file
 2 - Include to your database.php config file the public var $$elasticsearch and set the addres(es) / port(s) to your elastic database
-3 - Copy files /Controler/Component/ElasticSearchComponent.php and /View/Helper/ElasticPaginatorHelper.php to your
-    /Controler/Component and /View/Helper folders 
+3 - Copy files /Controler/Component/ElasticSearchComponent.php, /View/Helper/ElasticPaginatorHelper.php and /Model/Datasource/ElasticSearchṗhp to your
+    /Controler/Component, /View/Helper folders and /Model/Datasource/ 
     
-USING IN YOUR CONTROLLER
+**USING IN YOUR CONTROLLER**
 
 1 - Include the component:
 ```
@@ -27,17 +27,26 @@ $query = [
 
 3 - Use $query and params to create your query as follow in any order / combination and then pass the query to Elasticsearch\ClientBuilder with $elasticSearch->search($query);
 
+**PAGINATE**
+```
 $query = $this->ElasticSearch->paginate($query, $page);
+```
 query : your current query (array),
 page : actual page number (int).
 
+**SORT**
+```
 $query = $this->ElasticSearch->sort($query, $field, $order, $scoreFirst);
+```
 query : your current query (array),
 field : field to order by (str),
 order : direction: 'asc' or 'desc' (str),
 scoreFirst: if true the score order will be the first one, the field order the second one: true or false (bool). 
 
+**MATCH**
+```
 $query = $this->ElasticSearch->match($query, $conditions);
+```
 query : your current query (array),
 conditions: array with conditions where key = field name and value = filter to match (array)
 ```
@@ -46,8 +55,11 @@ conditions: array with conditions where key = field name and value = filter to m
         'id' => '23'
     ];
 ```
-    
+
+**NOT MATCH**
+```
 $query = $this->ElasticSearch->notMatch($query, $conditionsNot);
+```
 query : your current query (array),
 conditionsNot: array with conditions to deny where key = field name and value = filter to match (array)
 ```
@@ -56,8 +68,11 @@ conditionsNot: array with conditions to deny where key = field name and value = 
         'type' => '2'
     ];
 ```
-    
+
+**MATCH OR**
+```
 $query = $this->ElasticSearch->matchOr($query, $conditionsOr);
+```
 query : your current query (array),
 conditionsOr: array with conditions where key = field name and value = filter to match (array)
 ```
@@ -66,8 +81,11 @@ conditionsOr: array with conditions where key = field name and value = filter to
         'country' => 'BR'
     ];
 ```
-    
+
+**SEARACH WITH WILDCARDS**
+```
 $query = $this->ElasticSearch->wildcard($query, $search);
+```
 query : your current query (array),
 search: array with conditions where key = field name and value with wildcards = filter to find (array)
 ```
@@ -76,8 +94,11 @@ search: array with conditions where key = field name and value with wildcards = 
         'mac' => '??:*:36:FF'
     ];
 ```
-    
+
+**RANGE**
+```    
 $query = $this->ElasticSearch->range($query, $range);
+```
 query : your current query (array),
 search: array with conditions where key = field name as array and values 'start' and 'end' with ranges
 ```
@@ -89,7 +110,10 @@ search: array with conditions where key = field name as array and values 'start'
     ];
 ```
 
+**SUM**
+```
 $query = $this->ElasticSearch->sum($query, $sums);
+```
 query : your current query (array),
 search: array with names and fields to create sums where key = name sum and value  = field (array)
 ```
@@ -99,7 +123,7 @@ search: array with names and fields to create sums where key = name sum and valu
     ];
 ```
     
-SAMPLE
+**EXAMPLE IN CONTROLLER**
 ```
 <?php
 
@@ -166,7 +190,7 @@ functio action()
 ?>
 ```
 
-USING PAGINATION IN YOUR VIEW
+**USING PAGINATION IN YOUR VIEW**
 
 1 - Include the helper to your controller
 ```

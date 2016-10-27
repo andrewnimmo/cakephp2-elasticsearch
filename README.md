@@ -10,16 +10,20 @@
 USING IN YOUR CONTROLLER
 
 1 - Include the component:
+```
 public $components = [
     'ElasticSearch',
 ];
+```
 
 2 - Create the query base:
+```
 $query = [
     'index' => 'your-index-here',
     'type' => 'your-type-here',
     'scroll' => '1m',
 ];
+```
 
 3 - Use $query and params to create your query as follow in any order / combination and then pass the query to Elasticsearch\ClientBuilder with $elasticSearch->search($query);
 
@@ -36,55 +40,67 @@ scoreFirst: if true the score order will be the first one, the field order the s
 $query = $this->ElasticSearch->match($query, $conditions);
 query : your current query (array),
 conditions: array with conditions where key = field name and value = filter to match (array)
+```
     $condition = [
         'name' => 'John',
         'id' => '23'
     ];
+```
     
 $query = $this->ElasticSearch->notMatch($query, $conditionsNot);
 query : your current query (array),
 conditionsNot: array with conditions to deny where key = field name and value = filter to match (array)
+```
     $condition = [
         'gender' => 'm',
         'type' => '2'
     ];
+```
     
 $query = $this->ElasticSearch->matchOr($query, $conditionsOr);
 query : your current query (array),
 conditionsOr: array with conditions where key = field name and value = filter to match (array)
+```
     $condition = [
         'country' => 'US',
         'country' => 'BR'
     ];
+```
     
 $query = $this->ElasticSearch->wildcard($query, $search);
 query : your current query (array),
 search: array with conditions where key = field name and value with wildcards = filter to find (array)
+```
     $condition = [
         'ip' => '*192.*',
         'mac' => '??:*:36:FF'
     ];
+```
     
 $query = $this->ElasticSearch->range($query, $range);
 query : your current query (array),
 search: array with conditions where key = field name as array and values 'start' and 'end' with ranges
+```
     $range = [
         'date' => [
             'start' = '2016-03-02 00:00:00',
             'end' = '2016-03-03 00:00:00',
         ]
     ];
+```
 
 $query = $this->ElasticSearch->sum($query, $sums);
 query : your current query (array),
 search: array with names and fields to create sums where key = name sum and value  = field (array)
+```
     $sums = [
         'total' => 'value',
         'sum_upload' => 'upload'
     ];
+```
     
 SAMPLE
-
+```
 <?php
 
 public $components = [
@@ -148,16 +164,19 @@ functio action()
     
 }
 ?>
-
+```
 
 USING PAGINATION IN YOUR VIEW
 
 1 - Include the helper to your controller
+```
 public $helpers = [
     'ElasticPaginator',
 ];
+```
 
 2 - Call the paginator, where $person[params] are the result generated in controller with dealResponse
+```
 <?php
     echo $this->ElasticPaginator->numbers([
         'total'=> $person['total'],
@@ -173,3 +192,4 @@ public $helpers = [
         'escape' => false,
     ]);
 ?>
+```

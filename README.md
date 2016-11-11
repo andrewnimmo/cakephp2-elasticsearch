@@ -92,7 +92,7 @@ conditionsOr: array with conditions where key = field name and value = filter to
     ];
 ```
 
-**SEARACH WITH WILDCARDS**
+**SEARCH WITH WILDCARDS**
 ```
 $query = $this->ElasticSearch->wildcard($query, $search);
 ```
